@@ -4,11 +4,16 @@ import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import ProductDetail from "./pages/detail.js";
+import axios from "axios";
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+  let [bntclick, setBntclick] = useState(0);
+  let [loading, setLoading] = useState(false);
   // 페이지 이동 도와주는 함수
   let navigate = useNavigate();
+
+  let [showButton, setShowButton] = useState(true);
 
   return (
     <div className="App">
@@ -49,15 +54,64 @@ function App() {
           element={
             <>
               <div className="main-bg"></div>
-              <Container>
-                <Row>
+              <div className="container">
+                <div className="row">
                   {/* public 폴더 이미지 쓰는 권장 방식 */}
                   {/* <img src={process.env.PUBLIC_URL + "/logo192.png"} width="80%" /> */}
                   {shoes.map(function (a, i) {
                     return <ShopList picNum={i + 1} item={shoes[i]}></ShopList>;
                   })}
-                </Row>
-              </Container>
+                </div>
+                {showButton && (
+                  <button
+                    onClick={() => {
+                      // 응용3. 버튼을 누른 직후엔 "로딩중입니다" 이런 글자를 주변에 띄우고 싶으면?
+                      // 그리고 요청이 성공하거나 실패하거나 그 후엔 "로딩중입니다" 글자를 제거해야합니다.
+
+                      setLoading(true);
+                      console.log("before" + loading);
+
+                      if (bntclick == 0) {
+                        axios
+                          .get("https://codingapple1.github.io/shop/data2.json")
+                          .then((result) => {
+                            // 리액트는 html을 생성하는 게 아니라 스위치를 건드리는 방식으로 코드를 짬
+                            setShoes((current) => [...current, ...result.data]);
+                            setBntclick(bntclick + 1);
+                            setLoading(false);
+                            console.log("after" + loading);
+                          })
+                          .catch(() => {
+                            setLoading(false);
+                            console.log("failed");
+                          });
+                      }
+                      if (bntclick == 1) {
+                        axios
+                          .get("https://codingapple1.github.io/shop/data3.json")
+                          .then((result) => {
+                            setShoes((current) => [...current, ...result.data]);
+                            setBntclick(bntclick + 1);
+                            setLoading(false);
+                          })
+                          .catch(() => {
+                            setLoading(false);
+                            console.log("failed");
+                          });
+                        setShowButton(!showButton);
+
+                        // POST 요청
+                        // axios.post('URL', {name : 'kim'})
+                        // 동시에 AJAX 요청 여러개 날릴 때
+                        // Promise.all( [axios.get('URL1'), axios.get('URL2')] )
+                      }
+                    }}
+                  >
+                    more
+                  </button>
+                )}
+                {loading === true ? <div>loading</div> : null}
+              </div>
             </>
           }
         />
@@ -86,7 +140,7 @@ function About() {
 
 function ShopList(props) {
   return (
-    <Col>
+    <div className="col-md-4">
       <img
         src={
           "https://codingapple1.github.io/shop/shoes" + props.picNum + ".jpg"
@@ -95,7 +149,7 @@ function ShopList(props) {
       />
       <h4>{props.item.title}</h4>
       <p>{props.item.price}</p>
-    </Col>
+    </div>
   );
 }
 
