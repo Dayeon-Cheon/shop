@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
@@ -6,10 +6,13 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import ProductDetail from "./pages/detail.js";
 import axios from "axios";
 
+export let Context1 = createContext();
+
 function App() {
   let [shoes, setShoes] = useState(data);
   let [bntclick, setBntclick] = useState(0);
   let [loading, setLoading] = useState(false);
+  let [stock] = useState([10, 11, 2]);
   // 페이지 이동 도와주는 함수
   let navigate = useNavigate();
 
@@ -71,6 +74,8 @@ function App() {
                       setLoading(true);
                       console.log("before" + loading);
 
+                      // ShowLoading(setLoading);
+
                       if (bntclick == 0) {
                         axios
                           .get("https://codingapple1.github.io/shop/data2.json")
@@ -116,7 +121,14 @@ function App() {
           }
         />
         {/* URL 파라미터: detail/아무거나 라는 뜻 */}
-        <Route path="/detail/:id" element={<ProductDetail shoes={shoes} />} />
+        <Route
+          path="/detail/:id"
+          element={
+            <Context1.Provider value={{ stock }}>
+              <ProductDetail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
         {/* 404 page */}
         <Route path="*" element={<div>Page not found</div>} />
         {/* nested routes: 여러 유사한 페이지 필요할 때 */}
@@ -152,5 +164,12 @@ function ShopList(props) {
     </div>
   );
 }
+
+// function ShowLoading(props) {
+//   return (
+//     props(true);
+
+//     )
+// }
 
 export default App;

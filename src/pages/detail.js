@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+
+import { Context1 } from "./../App.js";
 // import styled from "styled-components";
 
 function ProductDetail(props) {
+  // 보관함 해체
+  let { stock } = useContext(Context1);
+
+  console.log(stock);
+
   let [alert, setAlert] = useState(1);
   let [input, setInput] = useState("");
   let [onlynum, setOnlynum] = useState(1);
   let [tab, setTab] = useState(0);
+  let [fade, setFade] = useState("");
 
   // mount, update시 실행
   // html 랜더링 이후에 동작: 어려운 연산, 서버에서 데이터 가져오는 작업, 타이머 장착 등
@@ -16,13 +24,17 @@ function ProductDetail(props) {
       setAlert(0);
     }, 2000);
 
+    setFade("end");
+
     isNaN(input) ? setOnlynum(0) : setOnlynum(1);
 
     // clean up function: unmount시 실행됨
     return () => {
       clearTimeout(a);
+      setFade("");
     };
-  });
+  }, []);
+
   // [] dependency: 변수가 변할 때만 실행
   // [] => 컴포넌트 mount시 1회만 실행하고 싶으면 이렇게만 작성
 
@@ -31,7 +43,7 @@ function ProductDetail(props) {
   let item = props.shoes.find((s) => s.id == id);
 
   return (
-    <div className="container">
+    <div className={`constainer start ${fade}`}>
       {alert === 1 ? (
         <div className="alert alert-warning">2초 이내 구매시 할인</div>
       ) : null}
