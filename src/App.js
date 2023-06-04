@@ -1,12 +1,11 @@
-import { createContext, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import ProductDetail from "./pages/detail.js";
+import ProductDetail from "./pages/Detail.js";
 import axios from "axios";
-
-export let Context1 = createContext();
+import Cart from "./pages/Cart.js";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -121,14 +120,10 @@ function App() {
           }
         />
         {/* URL 파라미터: detail/아무거나 라는 뜻 */}
-        <Route
-          path="/detail/:id"
-          element={
-            <Context1.Provider value={{ stock }}>
-              <ProductDetail shoes={shoes} />
-            </Context1.Provider>
-          }
-        />
+        <Route path="/detail/:id" element={<ProductDetail shoes={shoes} />} />
+
+        <Route path="/cart" element={<Cart />} />
+
         {/* 404 page */}
         <Route path="*" element={<div>Page not found</div>} />
         {/* nested routes: 여러 유사한 페이지 필요할 때 */}

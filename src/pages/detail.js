@@ -2,15 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
-import { Context1 } from "./../App.js";
 // import styled from "styled-components";
 
 function ProductDetail(props) {
-  // 보관함 해체
-  let { stock } = useContext(Context1);
-
-  console.log(stock);
-
   let [alert, setAlert] = useState(1);
   let [input, setInput] = useState("");
   let [onlynum, setOnlynum] = useState(1);
