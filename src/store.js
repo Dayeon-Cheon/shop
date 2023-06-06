@@ -1,18 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-
-let user = createSlice({
-  name: "user",
-  initialState: "cheon",
-  // state 수정해주는 함수
-  reducers: {
-    changeName(state) {
-      return "dayeon " + state;
-    },
-  },
-});
-
-// state 변경 함수들 남음
-export let { changeName } = user.actions;
+import user from "./store/userSlice.js";
 
 let stock = createSlice({
   name: "stock",
