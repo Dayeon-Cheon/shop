@@ -122,7 +122,7 @@ function App() {
         {/* URL 파라미터: detail/아무거나 라는 뜻 */}
         <Route path="/detail/:id" element={<ProductDetail shoes={shoes} />} />
 
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart shoes={shoes} />} />
 
         {/* 404 page */}
         <Route path="*" element={<div>Page not found</div>} />

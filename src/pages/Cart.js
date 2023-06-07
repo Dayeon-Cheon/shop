@@ -1,9 +1,10 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeAge } from "./../store/userSlice.js";
+import { addCount } from "./../store.js";
 
 function Cart() {
-  //Redux store 가져와주는 함수
+  // Redux store 가져와주는 함수
   let state = useSelector((state) => state);
 
   // state.js로 요청 보내주는 함수
@@ -37,10 +38,10 @@ function Cart() {
               <td>
                 <button
                   onClick={() => {
-                    dispatch(changeName());
+                    dispatch(addCount(state.cart[i].id));
                   }}
                 >
-                  버튼임
+                  +
                 </button>
               </td>
             </tr>

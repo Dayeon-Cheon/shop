@@ -1,10 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "./../store.js";
+import { useNavigate } from "react-router-dom";
 
 // import styled from "styled-components";
 
 function ProductDetail(props) {
+  let state = useSelector((state) => state);
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+
   let [alert, setAlert] = useState(1);
   let [input, setInput] = useState("");
   let [onlynum, setOnlynum] = useState(1);
@@ -58,8 +65,24 @@ function ProductDetail(props) {
               setInput(e.target.value);
             }}
           ></input>
-          <button className="btn btn-danger">주문하기</button>
+          {/* 주문하기 버튼 누르면 state에 새로운 {} 추가
+          setShoes 이용해야 하는데 가능? */}
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(addItem({ id: item.id, name: item.title, count: 1 }));
+            }}
+          >
+            주문하기
+          </button>
           {onlynum === 0 ? <div>only number</div> : null}
+          <Nav.Link
+            onClick={() => {
+              navigate("/cart");
+            }}
+          >
+            장바구니
+          </Nav.Link>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
