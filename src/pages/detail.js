@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "./../store.js";
+import { checkItem, addItem } from "./../store.js";
 import { useNavigate } from "react-router-dom";
 
 // import styled from "styled-components";
@@ -36,6 +36,14 @@ function ProductDetail(props) {
     };
   }, []);
 
+  // 이거 왜 두 번 실행됨? [] 추가하면 아예 실행 안 됨
+  useEffect(() => {
+    // 최근 본 상품 리스트에 추가
+    let watchedList = JSON.parse(localStorage.getItem("watched"));
+    watchedList.push(item);
+    localStorage.setItem("watched", JSON.stringify(watchedList));
+  });
+
   // [] dependency: 변수가 변할 때만 실행
   // [] => 컴포넌트 mount시 1회만 실행하고 싶으면 이렇게만 작성
 
@@ -65,11 +73,10 @@ function ProductDetail(props) {
               setInput(e.target.value);
             }}
           ></input>
-          {/* 주문하기 버튼 누르면 state에 새로운 {} 추가
-          setShoes 이용해야 하는데 가능? */}
           <button
             className="btn btn-danger"
             onClick={() => {
+              // dispatch(checkItem(item.id));
               dispatch(addItem({ id: item.id, name: item.title, count: 1 }));
             }}
           >

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
@@ -8,10 +8,15 @@ import axios from "axios";
 import Cart from "./pages/Cart.js";
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
+
   let [shoes, setShoes] = useState(data);
   let [bntclick, setBntclick] = useState(0);
   let [loading, setLoading] = useState(false);
   let [stock] = useState([10, 11, 2]);
+
   // 페이지 이동 도와주는 함수
   let navigate = useNavigate();
 
@@ -21,7 +26,15 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Shop</Navbar.Brand>
+          {/* <Navbar.Brand href="#">Shop</Navbar.Brand> */}
+
+          <Nav.Link
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Shop
+          </Nav.Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -132,6 +145,8 @@ function App() {
           <Route path="location" element={<div>location page</div>} />
         </Route>
       </Routes>
+
+      <WatchedList />
     </div>
   );
 }
@@ -166,5 +181,26 @@ function ShopList(props) {
 
 //     )
 // }
+
+function WatchedList() {
+  let watchedList = JSON.parse(localStorage.getItem("watched"));
+
+  watchedList = watchedList
+    .map(JSON.stringify)
+    .reverse() // convert to JSON string the array content, then reverse it (to check from end to begining)
+    .filter(function (item, index, arr) {
+      return arr.indexOf(item, index + 1) === -1;
+    }) // check if there is any occurence of the item in whole array
+    .reverse()
+    .map(JSON.parse); // revert it to original state
+
+  console.log(watchedList);
+
+  if (watchedList.length != 0) {
+    return <div>there's array</div>;
+  } else {
+    return <div>no array</div>;
+  }
+}
 
 export default App;
