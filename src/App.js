@@ -194,12 +194,18 @@ function WatchedList() {
     .reverse()
     .map(JSON.parse); // revert it to original state
 
-  console.log(watchedList);
+  if (watchedList.length !== 0) {
+    console.log(watchedList);
 
-  if (watchedList.length != 0) {
-    return <div>there's array</div>;
-  } else {
-    return <div>no array</div>;
+    return watchedList.map(function (a, i) {
+      return (
+        <div>
+          <p>최근 본 상품</p>
+          <div>{watchedList[i].id}</div>
+          <div>{watchedList[i].title}</div>
+        </div>
+      );
+    });
   }
 }
 
