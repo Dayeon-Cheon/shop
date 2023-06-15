@@ -36,11 +36,12 @@ function ProductDetail(props) {
     };
   }, []);
 
-  // 이거 왜 두 번 실행됨? [] 추가하면 아예 실행 안 됨
   useEffect(() => {
     // 최근 본 상품 리스트에 추가
     let watchedList = JSON.parse(localStorage.getItem("watched"));
     watchedList.push(item);
+    // watchedList = new Set(watchedList);
+    // watchedList = Array.from(watchedList);
     localStorage.setItem("watched", JSON.stringify(watchedList));
   });
 

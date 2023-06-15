@@ -6,16 +6,37 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import ProductDetail from "./pages/Detail.js";
 import axios from "axios";
 import Cart from "./pages/Cart.js";
+import { useQuery } from "react-query";
 
 function App() {
   useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify([]));
+    if (localStorage.getItem("watched") === null) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    }
   }, []);
 
   let [shoes, setShoes] = useState(data);
   let [bntclick, setBntclick] = useState(0);
   let [loading, setLoading] = useState(false);
   let [stock] = useState([10, 11, 2]);
+
+  // redux-persist 사용하면 모든 state 자동 저장
+
+  // React Query: 실시간 데이터를 계속 가져와야하는 사이트에 좋음 ex) 코인거래소, 채팅
+  // ajax 요청 성공/실패/로딩중 쉽게 파악 가능
+  // 틈만나면 자동으로 재요청해줌(refetch)
+  // 실패시 retry 알아서 해줌
+  // state 공유 안 해도 됨 props 전송 필요 없음
+  // ajax 결과 캐싱 가능(5분 동안 기억),  그전 성공 결과를 먼저 보여주기 때문에 빠름
+  let result = useQuery("result", () => {
+    return axios
+      .get("https://codingapple1.github.io/userdata.json")
+      .then((a) => {
+        return a.data;
+      });
+    // 리패치 되는 시간 설정, 자동 리패치 끌 수도 있음
+    // { staleTime: 2000 }
+  });
 
   // 페이지 이동 도와주는 함수
   let navigate = useNavigate();
@@ -58,6 +79,11 @@ function App() {
               >
                 Detail
               </Nav.Link>
+              <Nav classname="ms-auto">
+                {result.isLoading && "로딩 중"}
+                {result.error && "에러"}
+                {result.data && result.data.name}
+              </Nav>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -195,14 +221,20 @@ function WatchedList() {
     .map(JSON.parse); // revert it to original state
 
   if (watchedList.length !== 0) {
-    console.log(watchedList);
-
     return watchedList.map(function (a, i) {
       return (
         <div>
           <p>최근 본 상품</p>
-          <div>{watchedList[i].id}</div>
-          <div>{watchedList[i].title}</div>
+          {/* 사진 뭔가 다른 거 가져오는 듯 */}
+          <img
+            src={
+              "https://codingapple1.github.io/shop/shoes" +
+              watchedList[i].id +
+              ".jpg"
+            }
+            width="80%"
+          />
+          <p>{watchedList[i].title}</p>
         </div>
       );
     });
