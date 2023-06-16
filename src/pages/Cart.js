@@ -2,6 +2,16 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeAge } from "./../store/userSlice.js";
 import { addCount, deleteItem } from "./../store.js";
+import { memo } from "react";
+
+// memo props 변할 때만 랜더링-props가 길고 복잡하면 안 쓰는 게 나을 수도
+// 재랜더링 오래 걸리는 컴포넌트 감싸놓으면 좋음
+let Child = memo(function () {
+  console.log("재렌더링");
+  return <div>child</div>;
+});
+// 비슷한 useMemo-useEffect와 비슷한 용도(실행 시점의 차이)
+// 컴포넌트 로드시 1회만 실행하고 싶은 코드가 있으면 거기 담으면 됨
 
 function Cart() {
   // Redux store 가져와주는 함수
@@ -20,6 +30,7 @@ function Cart() {
       >
         +
       </button>
+      <Child />
       <Table>
         <thead>
           <tr>
