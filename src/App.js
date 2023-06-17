@@ -1,4 +1,11 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import {
+  useEffect,
+  useState,
+  lazy,
+  Suspense,
+  useTransition,
+  useDeferredValue,
+} from "react";
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
@@ -24,6 +31,12 @@ function App() {
   let [bntclick, setBntclick] = useState(0);
   let [loading, setLoading] = useState(false);
   let [stock] = useState([10, 11, 2]);
+
+  // 성능 향상, 오래걸리는 부분을 감싸면 코드 실행 시점 조절해주어 렌더링시 버벅이지 않게 해줌
+  // let [isPending, startTransition] = useTransition();
+
+  // state 변동 사항 생기면 늦게 처리해줌
+  // let state = useDeferredValue(name);
 
   // redux-persist 사용하면 모든 state 자동 저장
 
