@@ -1,10 +1,26 @@
-.start {
-  opacity: 0;
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #f2f2f2;
+  overflow: hidden;
 }
 
-.end {
-  opacity: 1;
-  transition: opacity 0.5s;
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #404040;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* remove the gap so it doesn't close */
 }
 
 .main-bg{

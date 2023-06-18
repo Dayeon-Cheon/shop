@@ -9,6 +9,7 @@ import {
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import data from "./data.js";
+import data2 from "./data2.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import ProductDetail from "./pages/Detail.js";
 import axios from "axios";
@@ -27,7 +28,7 @@ function App() {
     }
   }, []);
 
-  let [shoes, setShoes] = useState(data);
+  let [shoes, setShoes] = useState(data2);
   let [bntclick, setBntclick] = useState(0);
   let [loading, setLoading] = useState(false);
   let [stock] = useState([10, 11, 2]);
@@ -50,7 +51,7 @@ function App() {
     return axios
       .get("https://codingapple1.github.io/userdata.json")
       .then((a) => {
-        return a.data;
+        return a.data2;
       });
     // 리패치 되는 시간 설정, 자동 리패치 끌 수도 있음
     // { staleTime: 2000 }
@@ -63,49 +64,26 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="light" expand="lg">
-        <Container fluid>
-          {/* <Navbar.Brand href="#">Shop</Navbar.Brand> */}
-
-          <Nav.Link
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Shop
-          </Nav.Link>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              {/* navigate(1) 앞으로 한 페이지
-              navigate(-1) 뒤로 한 페이지 */}
-              <Nav.Link
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Home
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  navigate("/detail");
-                }}
-              >
-                Detail
-              </Nav.Link>
-              <Nav classname="ms-auto">
-                {result.isLoading && "로딩 중"}
-                {result.error && "에러"}
-                {result.data && result.data.name}
-              </Nav>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <div className="topnav">
+        <Link to="/" className="home-link">
+          Online Supermarket
+        </Link>
+        <Link to="/category" className="category-link">
+          Fresh food
+        </Link>
+        <Link to="/category" className="category-link">
+          Food cupboard
+        </Link>
+        <Link to="/category" className="category-link">
+          Drinks
+        </Link>
+        <div className="topnav-right">
+          <Link to="/detail" className="cart-link">
+            Cart
+          </Link>
+          {/* user name or login button */}
+        </div>
+      </div>
 
       <Suspense fallback={<div>로딩 중</div>}>
         <Routes>
@@ -144,7 +122,7 @@ function App() {
                               // 리액트는 html을 생성하는 게 아니라 스위치를 건드리는 방식으로 코드를 짬
                               setShoes((current) => [
                                 ...current,
-                                ...result.data,
+                                ...result.data2,
                               ]);
                               setBntclick(bntclick + 1);
                               setLoading(false);
@@ -163,7 +141,7 @@ function App() {
                             .then((result) => {
                               setShoes((current) => [
                                 ...current,
-                                ...result.data,
+                                ...result.data2,
                               ]);
                               setBntclick(bntclick + 1);
                               setLoading(false);
