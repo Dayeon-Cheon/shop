@@ -49,7 +49,7 @@ let data = [
 
   {
     id: 6,
-    title: "Orange Juice 1L",
+    title: "Apple Juice 1L",
     category: "Drinks",
     content: "",
     price: 1.15,
@@ -102,6 +102,7 @@ let data = [
     content: "",
     price: 1.0,
   },
+
   {
     id: 13,
     title: "Lemon Cream Biscuit 100G",
@@ -112,7 +113,7 @@ let data = [
 
   {
     id: 14,
-    title: "Finger Biscuits 250G",
+    title: "Finger Biscuit 250G",
     category: "Food cupboard",
     content: "",
     price: 0.7,
@@ -152,7 +153,7 @@ let data = [
 
   {
     id: 19,
-    title: "Soya Milk 1L",
+    title: "Soya Drink 1L",
     category: "Drink",
     content: "",
     price: 1.25,
@@ -181,6 +182,7 @@ let data = [
     content: "",
     price: 2.75,
   },
+
   {
     id: 23,
     title: "Falafel 152G",

@@ -33,6 +33,8 @@ function App() {
   let [loading, setLoading] = useState(false);
   let [stock] = useState([10, 11, 2]);
 
+  let [item, setItem] = useState(data);
+
   // 성능 향상, 오래걸리는 부분을 감싸면 코드 실행 시점 조절해주어 렌더링시 버벅이지 않게 해줌
   // let [isPending, startTransition] = useTransition();
 
@@ -78,14 +80,14 @@ function App() {
           Drinks
         </Link>
         <div className="topnav-right">
-          <Link to="/detail" className="cart-link">
+          <Link to="/cart" className="cart-link">
             Cart
           </Link>
           {/* user name or login button */}
         </div>
       </div>
 
-      <Suspense fallback={<div>로딩 중</div>}>
+      <Suspense fallback={<div>loading..</div>}>
         <Routes>
           <Route
             path="/"
@@ -198,11 +200,23 @@ function ShopList(props) {
   return (
     <div className="col-md-4">
       <img
-        src={
-          "https://codingapple1.github.io/shop/shoes" + props.picNum + ".jpg"
-        }
+        // src={
+        //   "https://codingapple1.github.io/shop/shoes" + props.picNum + ".jpg"
+        // }
+        src={process.env.PUBLIC_URL + "/img/0.jpg"}
         width="80%"
       />
+      <img src={process.env.PUBLIC_URL + "./img/top_img.jpeg"} />
+      <h4>{props.item.title}</h4>
+      <p>{props.item.price}</p>
+    </div>
+  );
+}
+
+function ItemList(props) {
+  return (
+    <div className="col-md-4">
+      <img src={require("./img/0.jpg")} width="80%" />
       <h4>{props.item.title}</h4>
       <p>{props.item.price}</p>
     </div>
@@ -217,37 +231,35 @@ function ShopList(props) {
 // }
 
 function WatchedList() {
-  let watchedList = JSON.parse(localStorage.getItem("watched"));
-
-  console.log(watchedList);
-  watchedList = watchedList
-    .map(JSON.stringify)
-    .reverse() // convert to JSON string the array content, then reverse it (to check from end to begining)
-    .filter(function (item, index, arr) {
-      return arr.indexOf(item, index + 1) === -1;
-    }) // check if there is any occurence of the item in whole array
-    .reverse()
-    .map(JSON.parse); // revert it to original state
-
-  if (watchedList.length !== 0) {
-    return watchedList.map(function (a, i) {
-      return (
-        <div>
-          <p>최근 본 상품</p>
-          {/* 사진 뭔가 다른 거 가져오는 듯 */}
-          <img
-            src={
-              "https://codingapple1.github.io/shop/shoes" +
-              watchedList[i].id +
-              ".jpg"
-            }
-            width="80%"
-          />
-          <p>{watchedList[i].title}</p>
-        </div>
-      );
-    });
-  }
+  // let watchedList = JSON.parse(localStorage.getItem("watched"));
+  // console.log(watchedList);
+  // watchedList = watchedList
+  //   .map(JSON.stringify)
+  //   .reverse() // convert to JSON string the array content, then reverse it (to check from end to begining)
+  //   .filter(function (item, index, arr) {
+  //     return arr.indexOf(item, index + 1) === -1;
+  //   }) // check if there is any occurence of the item in whole array
+  //   .reverse()
+  //   .map(JSON.parse); // revert it to original state
+  // if (watchedList.length !== 0) {
+  //   return watchedList.map(function (a, i) {
+  //     return (
+  //       <div>
+  //         <p>최근 본 상품</p>
+  //         {/* 사진 뭔가 다른 거 가져오는 듯 */}
+  //         <img
+  //           src={
+  //             "https://codingapple1.github.io/shop/shoes" +
+  //             watchedList[i].id +
+  //             ".jpg"
+  //           }
+  //           width="80%"
+  //         />
+  //         <p>{watchedList[i].title}</p>
+  //       </div>
+  //     );
+  //   });
+  // }
 }
 
 export default App;

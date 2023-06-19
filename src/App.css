@@ -25,7 +25,7 @@
 
 .main-bg{
   height: 400px ;
-  background-image: url("./img/vegan_img.jpeg");
+  background-image: url("./img/top_img.jpeg");
   background-size: cover; /* 창 줄여도 사진 꽉 차게 */
   background-position: center;
 }
