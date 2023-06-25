@@ -23,6 +23,11 @@
   margin-top: 0; /* remove the gap so it doesn't close */
 }
 
+.item-img-main{
+  width: 80%;
+  height: 60%;
+}
+
 .main-bg{
   height: 400px ;
   background-image: url("./img/top_img.jpeg");

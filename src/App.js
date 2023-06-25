@@ -14,6 +14,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // import ProductDetail from "./pages/Detail.js";
 import axios from "axios";
 // import Cart from "./pages/Cart.js";
+import Category from "./pages/Category.js";
 import { useQuery } from "react-query";
 
 // 첫 페이지 로딩 속도를 향상
@@ -70,13 +71,13 @@ function App() {
         <Link to="/" className="home-link">
           Online Supermarket
         </Link>
-        <Link to="/category" className="category-link">
+        <Link to="/category/fresh-food" className="category-link">
           Fresh food
         </Link>
-        <Link to="/category" className="category-link">
+        <Link to="/category/food-cupboard" className="category-link">
           Food cupboard
         </Link>
-        <Link to="/category" className="category-link">
+        <Link to="/category/drinks" className="category-link">
           Drinks
         </Link>
         <div className="topnav-right">
@@ -98,10 +99,14 @@ function App() {
                   <div className="row">
                     {/* public 폴더 이미지 쓰는 권장 방식 */}
                     {/* <img src={process.env.PUBLIC_URL + "/logo192.png"} width="80%" /> */}
-                    {shoes.map(function (a, i) {
+                    {/* {shoes.map(function (a, i) {
                       return (
                         <ShopList picNum={i + 1} item={shoes[i]}></ShopList>
                       );
+                    })} */}
+
+                    {item.map(function (a, i) {
+                      return <ItemList picNum={i} item={item[i]}></ItemList>;
                     })}
                   </div>
                   {showButton && (
@@ -170,15 +175,16 @@ function App() {
             }
           />
           {/* URL 파라미터: detail/아무거나 라는 뜻 */}
+          <Route path="/category/:id" element={<Category item={item} />} />
           <Route path="/detail/:id" element={<ProductDetail shoes={shoes} />} />
           <Route path="/cart" element={<Cart shoes={shoes} />} />
           {/* 404 page */}
           <Route path="*" element={<div>Page not found</div>} />
           {/* nested routes: 여러 유사한 페이지 필요할 때 */}
-          <Route path="/about" element={<About />}>
+          {/* <Route path="/about" element={<About />}>
             <Route path="member" element={<div>member page</div>} />
             <Route path="location" element={<div>location page</div>} />
-          </Route>
+          </Route> */}
         </Routes>
       </Suspense>
 
@@ -187,48 +193,42 @@ function App() {
   );
 }
 
-function About() {
-  return (
-    <div>
-      <h4>About page</h4>
-      <Outlet></Outlet>
-    </div>
-  );
-}
+// function About() {
+//   return (
+//     <div>
+//       <h4>About page</h4>
+//       <Outlet></Outlet>
+//     </div>
+//   );
+// }
 
-function ShopList(props) {
-  return (
-    <div className="col-md-4">
-      <img
-        // src={
-        //   "https://codingapple1.github.io/shop/shoes" + props.picNum + ".jpg"
-        // }
-        src={process.env.PUBLIC_URL + "/img/0.jpg"}
-        width="80%"
-      />
-      <img src={process.env.PUBLIC_URL + "./img/top_img.jpeg"} />
-      <h4>{props.item.title}</h4>
-      <p>{props.item.price}</p>
-    </div>
-  );
-}
+// function ShopList(props) {
+//   return (
+//     <div className="col-md-4">
+//       <img
+//         src={
+//           "https://codingapple1.github.io/shop/shoes" + props.picNum + ".jpg"
+//         }
+//         width="80%"
+//       />
+//       <h4>{props.item.title}</h4>
+//       <p>{props.item.price}</p>
+//     </div>
+//   );
+// }
 
 function ItemList(props) {
   return (
     <div className="col-md-4">
-      <img src={require("./img/0.jpg")} width="80%" />
+      <img
+        className="item-img-main"
+        src={process.env.PUBLIC_URL + "/img/" + props.picNum + ".jpg"}
+      />
       <h4>{props.item.title}</h4>
-      <p>{props.item.price}</p>
+      <p>£{props.item.price}</p>
     </div>
   );
 }
-
-// function ShowLoading(props) {
-//   return (
-//     props(true);
-
-//     )
-// }
 
 function WatchedList() {
   // let watchedList = JSON.parse(localStorage.getItem("watched"));
