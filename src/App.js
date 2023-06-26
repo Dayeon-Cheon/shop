@@ -71,13 +71,13 @@ function App() {
         <Link to="/" className="home-link">
           Online Supermarket
         </Link>
-        <Link to="/category/fresh-food" className="category-link">
+        <Link to="/list?cat=fresh-food" className="category-link">
           Fresh food
         </Link>
-        <Link to="/category/food-cupboard" className="category-link">
+        <Link to="/list?cat=food-cupboard" className="category-link">
           Food cupboard
         </Link>
-        <Link to="/category/drinks" className="category-link">
+        <Link to="/list?cat=drinks" className="category-link">
           Drinks
         </Link>
         <div className="topnav-right">
@@ -175,7 +175,7 @@ function App() {
             }
           />
           {/* URL 파라미터: detail/아무거나 라는 뜻 */}
-          <Route path="/category/:id" element={<Category item={item} />} />
+          <Route path="/list" element={<Category item={item} />} />
           <Route path="/detail/:id" element={<ProductDetail shoes={shoes} />} />
           <Route path="/cart" element={<Cart shoes={shoes} />} />
           {/* 404 page */}

@@ -1,18 +1,12 @@
-import { useParams } from "react-router-dom";
-
-// import styled from "styled-components";
-
 function Category(props) {
-  let { params } = useParams();
-  const filtered = props.item.filter((item) => {
-    return item.category === { params };
-  });
+  let queryParameters = new URLSearchParams(window.location.search);
+  let cat = queryParameters.get("cat");
 
-  console.log(params);
-  console.log(filtered);
+  // 카테고리 필터
 
-  //　배열 해당 카테고리 아이템만 남기기
-  return <div>hey</div>;
+  //   console.log();
+
+  return <div>{cat}</div>;
 }
 
 export default Category;
