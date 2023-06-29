@@ -2,7 +2,7 @@ let data = [
   {
     id: 0,
     title: "Tofu 280G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.3,
   },
@@ -10,7 +10,7 @@ let data = [
   {
     id: 1,
     title: "Milk Chocolate Bar 240G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 1.65,
   },
@@ -18,7 +18,7 @@ let data = [
   {
     id: 2,
     title: "Mature Grated Cheddar 250G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.75,
   },
@@ -26,7 +26,7 @@ let data = [
   {
     id: 3,
     title: "Smooth Peanut Butter 300G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 3.0,
   },
@@ -34,7 +34,7 @@ let data = [
   {
     id: 4,
     title: "Crunchy Peanut Butter 300G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 3.0,
   },
@@ -98,7 +98,7 @@ let data = [
   {
     id: 12,
     title: "Milk Chocolate Biscuit 125G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 1.0,
   },
@@ -106,7 +106,7 @@ let data = [
   {
     id: 13,
     title: "Lemon Cream Biscuit 100G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 0.85,
   },
@@ -114,7 +114,7 @@ let data = [
   {
     id: 14,
     title: "Finger Biscuit 250G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 0.7,
   },
@@ -122,7 +122,7 @@ let data = [
   {
     id: 15,
     title: "Salted Caramel Cream Biscuit 200G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 1.25,
   },
@@ -130,7 +130,7 @@ let data = [
   {
     id: 16,
     title: "Dark Chocolate Bar 240G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 1.65,
   },
@@ -138,7 +138,7 @@ let data = [
   {
     id: 17,
     title: "White Chocolate Bar 240G",
-    category: "Food cupboard",
+    category: "food-cupboard",
     content: "",
     price: 1.65,
   },
@@ -146,7 +146,7 @@ let data = [
   {
     id: 18,
     title: "Oat Drink 1L",
-    category: "Drink",
+    category: "drinks",
     content: "",
     price: 2.1,
   },
@@ -154,7 +154,7 @@ let data = [
   {
     id: 19,
     title: "Soya Drink 1L",
-    category: "Drink",
+    category: "drinks",
     content: "",
     price: 1.25,
   },
@@ -162,7 +162,7 @@ let data = [
   {
     id: 20,
     title: "Coconut Drink 1L",
-    category: "Drink",
+    category: "drinks",
     content: "",
     price: 1.25,
   },
@@ -170,7 +170,7 @@ let data = [
   {
     id: 21,
     title: "Almond Drink 1L",
-    category: "Drink",
+    category: "drinks",
     content: "",
     price: 2.1,
   },
@@ -178,7 +178,7 @@ let data = [
   {
     id: 22,
     title: "Cheddar Slices 250G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.75,
   },
@@ -186,7 +186,7 @@ let data = [
   {
     id: 23,
     title: "Falafel 152G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.65,
   },
@@ -194,7 +194,7 @@ let data = [
   {
     id: 24,
     title: "Organic Houmous 200G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 1.2,
   },
@@ -202,7 +202,7 @@ let data = [
   {
     id: 25,
     title: "Kimchi 350G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 4.75,
   },
@@ -210,7 +210,7 @@ let data = [
   {
     id: 26,
     title: "Four Cheese Tortelloni 300G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.0,
   },
@@ -218,7 +218,7 @@ let data = [
   {
     id: 27,
     title: "Spinach & Ricotta Tortelloni 300G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 2.0,
   },
@@ -226,7 +226,7 @@ let data = [
   {
     id: 28,
     title: "Mushroom Ravioli 250G",
-    category: "Fresh food",
+    category: "fresh-food",
     content: "",
     price: 3.25,
   },
