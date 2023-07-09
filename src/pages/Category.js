@@ -9,18 +9,19 @@ function Category(props) {
 
   console.log(filteredItem);
 
-  //   filteredItem.map(function (a, i) {
-  return (
-    <div className="col-md-4">
-      <img
-        className="item-img-main"
-        src={process.env.PUBLIC_URL + "/img/" + filteredItem[0].id + ".jpg"}
-      />
-      <h4>{filteredItem[0].title}</h4>
-      <p>£{filteredItem[0].price}</p>
-    </div>
-  );
-  //   });
+  filteredItem.map(function (a, i) {
+    return (
+      <div className="col-md-4">
+        <div>{filteredItem[0].title}</div>
+        <img
+          className="item-img-main"
+          src={process.env.PUBLIC_URL + "/img/" + filteredItem.id + ".jpg"}
+        />
+        <h4>{filteredItem.title}</h4>
+        <p>£{filteredItem.price}</p>
+      </div>
+    );
+  });
 }
 
 export default Category;
